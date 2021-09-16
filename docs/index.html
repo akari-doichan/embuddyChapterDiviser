@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Shuto" />
+    <meta name="twitter:creator" content="@cabernet_rock" />
+    <meta name="twitter:site" content="@cabernet_rock" />
+    <meta property="og:type" content="article" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content="static/images/embuddy.png" />
+    <title>embuddy Chaptor Diviser</title>
+    <link rel="stylesheet" href="static/css/main.css" />
+    <link
+      rel="shortcut icon"
+      href="static/images/embuddy.png"
+      type="image/png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="static/images/embuddy.png"
+    />
+  </head>
+
+  <body>
+    <header id="banner" class="body">
+      <h1>embuddy Chaptor Editor</h1>
+    </header>
+    <section id="content" class="body" style="display: block">
+      <!-- Download data as JSON -->
+      <div class="align-center">
+        <label class="video"
+          >Chose Your Video File<input
+            id="upload-video"
+            type="file"
+            accept="video/*"
+            style="display: none"
+        /></label>
+        <button id="copy2clipboardBtn">Copy to Clipboard</button>
+      </div>
+      <!-- Video -->
+      <h2>Video</h2>
+
+      <div class="video-wrapper align-center">
+        <div class="video">
+          <video
+            controls
+            id="uploaded-video"
+            width="360px"
+            height="360px"
+            src=""
+            style="border: black 1px solid"
+            autoplay
+          ></video>
+        </div>
+        <div class="video-controls"></div>
+      </div>
+
+      <h2>Video Info</h2>
+      <div class="video-info align-center">
+        <table id="video-info-table">
+          <thead>
+            <tr>
+              <th>Add</th>
+              <th>Del</th>
+              <th style="min-width: 50px">Start</th>
+              <th style="min-width: 50px">End</th>
+              <th>Label</th>
+            </tr>
+          </thead>
+          <tbody id="video-info">
+            <tr>
+              <td>
+                <input type="button" value="＋" class="add" tabindex="-1" />
+              </td>
+              <td>
+                <input type="button" value="－" class="del" tabindex="-1" />
+              </td>
+              <td>
+                <input type="number" value="0" min="0" step="1" name="start" />
+              </td>
+              <td>
+                <input type="number" value="0" min="0" step="1" name="end" />
+              </td>
+              <td>
+                <input type="text" value="" name="label" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <script
+      type="text/javascript"
+      src="static/js/vendor/jquery-3.6.0.min.js"
+    ></script>
+    <script type="text/javascript" src="static/js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+@font-face {
+  font-family: "Acme";
+  src: url("../fonts/Acme/Acme-Regular.ttf") format("truetype");
+}
+
+body {
+  background: #dae9ed;
+  color: #000305;
+  font-size: 87.5%;
+  font-family: "Acme", "ヒラギノ丸ゴ Pro W4", "ヒラギノ丸ゴ Pro",
+    "Hiragino Maru Gothic Pro", "ヒラギノ角ゴ Pro W3",
+    "Hiragino Kaku Gothic Pro", "HG丸ｺﾞｼｯｸM-PRO", "HGMaruGothicMPRO",
+    "Trebuchet MS", Trebuchet, "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+.body {
+  clear: both;
+  margin: 0 auto;
+  width: 800px;
+}
+
+/* Content */
+#content {
+  background: #fff;
+  overflow: hidden;
+  padding: 20px 20px;
+  max-width: calc(100% - 40px);
+  width: 760px;
+  border-radius: 10px 10px 0 0;
+  -moz-border-radius: 10px 10px 0 0;
+  -webkit-border-radius: 10px 10px 0 0;
+}
+
+/* Table */
+table {
+  width: 98%;
+  border: 2px #2b2b2b solid;
+  border-collapse: collapse;
+  table-layout: auto;
+  margin: 0.5em auto 1.5em auto;
+}
+table * {
+  text-align: center;
+  vertical-align: middle;
+}
+thead th {
+  background-color: black;
+  color: white;
+}
+td,
+th {
+  border: 1px #2b2b2b solid;
+  padding: 0.5em 0.4em;
+}
+td input {
+  border: 0;
+  width: 100%;
+  padding: 0.5em 0;
+  background: transparent;
+}
+input[name="end"],
+input[name="start"] {
+  max-width: 50px;
+}
+input[name="label"] {
+  background-color: #f2f3f3;
+}
+
+div.align-center {
+  text-align: center;
+}
+
+/* Button StyleSheet */
+button,
+label.video {
+  display: inline-block;
+  position: relative;
+  color: #000;
+  padding: 0.75em 1.5em;
+  cursor: pointer;
+  border-radius: 5px;
+}
+button#copy2clipboardBtn {
+  background-color: black;
+  color: white;
+}
+input.del {
+  background-color: #6495ed;
+  border: blue 2px solid;
+}
+input.add {
+  background-color: #ca3131;
+  border: red 2px solid;
+}
+
+input[type="button"],
+label {
+  cursor: pointer;
+}
+label.video:before,
+button:before {
+  content: "";
+  position: absolute;
+  border: #fff solid 1px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 5px;
+  transition-duration: 0.3s;
+  transition-property: top right bottom left;
+}
+label.video:hover:before,
+button:hover:before {
+  top: -6px;
+  right: -6px;
+  bottom: -6px;
+  left: -6px;
+}
+label.video {
+  background-color: #ffea7f;
+  border: 0;
+}
+label.video:before {
+  border: #ffea7f solid 2px;
+}
