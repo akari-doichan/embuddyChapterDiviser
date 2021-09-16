@@ -68,6 +68,9 @@ input[name="start"] {
 }
 input[name="label"] {
   background-color: #f2f3f3;
+  text-align: left;
+  padding-left: 10px;
+  width: calc(100% - 10px);
 }
 
 div.align-center {

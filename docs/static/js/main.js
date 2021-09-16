@@ -50,11 +50,20 @@ $(document).on("click", "#copy2clipboardBtn", function () {
   var text = "";
 
   var copyListener = function (e) {
+    var text = "";
+    var values = [];
     video_info.querySelectorAll("tr").forEach(function (e, i) {
-      let label = e.querySelector("input[name='label']");
-      let start = e.querySelector("input[name='start']");
-      let end = e.querySelector("input[name='end']");
-      text += `${label.value}\t${start.value}\t${end.value - start.value}\n`;
+      values.push([
+        e.querySelector("input[name='label']").value,
+        e.querySelector("input[name='start']").value,
+      ]);
+    });
+    values.forEach(function (e, i) {
+      if (i == values.length - 1) {
+        text += `${e[0]}\t${e[1]}\t${parseInt(uploaded_video.duration) - e[1]}`;
+      } else {
+        text += `${e[0]}\t${e[1]}\t${values[i + 1][1] - e[1]}\n`;
+      }
     });
     e.clipboardData.setData("text/plain", text.trim());
     e.preventDefault();
