@@ -6,16 +6,104 @@
 
 const upload_video_btn = document.querySelector("input#upload-video");
 const uploaded_video = document.querySelector("video#uploaded-video");
+const video_start_stop_btn = document.querySelector("button#video-start-stop");
+const video_skip_10s = document.querySelector("button#video-skip-10s");
+const video_back_10s = document.querySelector("button#video-back-10s");
+const video_curt_speed = document.querySelector("span#video-curt-speed");
+const video_speed_control = document.querySelector("input#video-speed");
+const video_curt_position = document.querySelector("span#video-curt-position");
+const video_position_control = document.querySelector("input#video-position");
+const video_mute_btn = document.querySelector("input#video-mute");
+const video_max_position = document.querySelector("div#video-max-position");
 const video_info = document.querySelector("tbody#video-info");
 
 //=== Upload Video ===
-upload_video_btn.addEventListener("change", function (event) {
-  var URL = URL || webkitURL;
-  var file = event.target.files[0];
-  uploaded_video.src = URL.createObjectURL(file);
-});
+upload_video_btn.addEventListener(
+  "change",
+  function (event) {
+    var URL = URL || webkitURL;
+    var file = event.target.files[0];
+    uploaded_video.src = URL.createObjectURL(file);
+    var timer = setInterval(function () {
+      if (uploaded_video.readyState > 0) {
+        let duration = uploaded_video.duration.toString();
+        video_position_control.max = duration;
+        video_max_position.innerHTML = date_formate(duration).slice(0, -3);
+        clearInterval(timer);
+      }
+    }, 300);
+    startTimer();
+  },
+  false
+);
 
-//=== Move Form ===
+const zeropad = function (v) {
+  return ("00" + v).slice(-2);
+};
+
+const date_formate = function (ds) {
+  let sec = Math.floor(ds);
+  let msec = ((ds - sec) * 100).toFixed(0);
+  let min = Math.floor(sec / 60);
+  sec -= min * 60;
+  return zeropad(min) + ":" + zeropad(sec) + ":" + zeropad(msec);
+};
+
+/* <--- Video Controller --- */
+var playtimer = null;
+const startTimer = function () {
+  playtimer = setInterval(function () {
+    video_position_control.value = uploaded_video.currentTime.toFixed(1);
+  }, 100);
+};
+const stopTimer = function () {
+  clearInterval(playtimer);
+};
+uploaded_video.addEventListener("timeupdate", function () {
+  video_curt_position.textContent = uploaded_video.currentTime.toFixed(1);
+});
+video_skip_10s.addEventListener("click", function () {
+  uploaded_video.currentTime = Math.min(
+    uploaded_video.currentTime + 10,
+    uploaded_video.duration
+  );
+});
+video_back_10s.addEventListener("click", function () {
+  uploaded_video.currentTime = Math.max(uploaded_video.currentTime - 10, 0);
+});
+video_start_stop_btn.addEventListener("click", function () {
+  if (video_start_stop_btn.classList.contains("playing")) {
+    uploaded_video.pause();
+    stopTimer();
+    video_start_stop_btn.classList.add("pausing");
+    video_start_stop_btn.classList.remove("playing");
+    video_start_stop_btn.innerHTML = "Play";
+  } else {
+    uploaded_video.play();
+    startTimer();
+    video_start_stop_btn.classList.add("playing");
+    video_start_stop_btn.classList.remove("pausing");
+    video_start_stop_btn.innerHTML = "Pause";
+  }
+});
+video_speed_control.addEventListener("change", function () {
+  let curt_speed = video_speed_control.value;
+  uploaded_video.playbackRate = curt_speed;
+  video_curt_speed.textContent = curt_speed;
+});
+video_position_control.addEventListener("input", function () {
+  uploaded_video.currentTime = video_position_control.value;
+  stopTimer();
+});
+video_position_control.addEventListener("change", function () {
+  uploaded_video.currentTime = video_position_control.value;
+  startTimer();
+});
+video_mute_btn.addEventListener("click", function () {
+  uploaded_video.muted = video_mute_btn.checked;
+});
+/* --- Video Controller ---> */
+
 $(document).on("click", ".add", function () {
   var target = $(this).parent().parent();
   var clone = target.clone(true);
