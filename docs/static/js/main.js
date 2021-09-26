@@ -4,6 +4,7 @@
  * @License MIT license <https://github.com/akari-doichan/embuddyChapterDiviser/blob/main/LICENSE>
  */
 
+const video_url_input = document.querySelector("input#video-url");
 const upload_video_btn = document.querySelector("input#upload-video");
 const uploaded_video = document.querySelector("video#uploaded-video");
 const video_start_stop_btn = document.querySelector("button#video-start-stop");
@@ -17,22 +18,34 @@ const video_mute_btn = document.querySelector("input#video-mute");
 const video_max_position = document.querySelector("div#video-max-position");
 const video_info = document.querySelector("tbody#video-info");
 
+const changeVideoURL = (url) => {
+  uploaded_video.src = url;
+  var timer = setInterval(function () {
+    if (uploaded_video.readyState > 0) {
+      let duration = uploaded_video.duration.toString();
+      video_position_control.max = duration;
+      video_max_position.innerHTML = date_formate(duration).slice(0, -3);
+      clearInterval(timer);
+    }
+  }, 300);
+  startTimer();
+};
+
 //=== Upload Video ===
 upload_video_btn.addEventListener(
   "change",
   function (event) {
     var URL = URL || webkitURL;
     var file = event.target.files[0];
-    uploaded_video.src = URL.createObjectURL(file);
-    var timer = setInterval(function () {
-      if (uploaded_video.readyState > 0) {
-        let duration = uploaded_video.duration.toString();
-        video_position_control.max = duration;
-        video_max_position.innerHTML = date_formate(duration).slice(0, -3);
-        clearInterval(timer);
-      }
-    }, 300);
-    startTimer();
+    changeVideoURL(URL.createObjectURL(file));
+  },
+  false
+);
+
+video_url_input.addEventListener(
+  "change",
+  function (event) {
+    changeVideoURL(video_url_input.value);
   },
   false
 );
