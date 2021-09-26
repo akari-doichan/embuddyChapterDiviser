@@ -7,6 +7,7 @@
 const video_url_input = document.querySelector("input#video-url");
 const upload_video_btn = document.querySelector("input#upload-video");
 const uploaded_video = document.querySelector("video#uploaded-video");
+const uploaded_video_src = uploaded_video.querySelector("source");
 const video_start_stop_btn = document.querySelector("button#video-start-stop");
 const video_skip_10s = document.querySelector("button#video-skip-10s");
 const video_back_10s = document.querySelector("button#video-back-10s");
@@ -18,14 +19,13 @@ const video_mute_btn = document.querySelector("input#video-mute");
 const video_max_position = document.querySelector("div#video-max-position");
 const video_info = document.querySelector("tbody#video-info");
 
-const changeVideoURL = (url) => {
-  uploaded_video.src = url;
-  var timer = setInterval(function () {
+const startVideoTimer = (url) => {
+  var updateVideoStatesTimer = setInterval(function () {
     if (uploaded_video.readyState > 0) {
       let duration = uploaded_video.duration.toString();
       video_position_control.max = duration;
       video_max_position.innerHTML = date_formate(duration).slice(0, -3);
-      clearInterval(timer);
+      clearInterval(updateVideoStatesTimer);
     }
   }, 300);
   startTimer();
@@ -37,15 +37,18 @@ upload_video_btn.addEventListener(
   function (event) {
     var URL = URL || webkitURL;
     var file = event.target.files[0];
-    changeVideoURL(URL.createObjectURL(file));
+    uploaded_video.src = URL.createObjectURL(file);
+    startVideoTimer();
   },
   false
 );
 
+// Input Google Drive Video Id.
 video_url_input.addEventListener(
   "change",
   function (event) {
-    changeVideoURL(video_url_input.value);
+    uploaded_video_src.src = `https://drive.google.com/uc?export=download&id=${video_url_input.value}`;
+    startVideoTimer();
   },
   false
 );

@@ -18,7 +18,7 @@
       property="og:url"
       content="https://akari-doichan.github.io/embuddyChapterDiviser/"
     />
-    <meta property="og:image" content="static/images/embuddy-header.png" />
+    <meta property="og:image" content="static/images/embuddy-icon.png" />
     <title>embuddy Chaptor Diviser</title>
     <link rel="stylesheet" href="static/css/main.css" />
     <link
@@ -39,7 +39,7 @@
     </header>
     <section id="content" class="body" style="display: block">
       <!-- Download data as JSON -->
-      <div class="align-center">
+      <div class="align-center url-form-group">
         <label class="video"
           >Chose Your Video File<input
             id="upload-video"
@@ -47,14 +47,13 @@
             accept="video/*"
             style="display: none"
         /></label>
-        <button id="copy2clipboardBtn">Copy to Clipboard</button>
-      </div>
-      <div class="align-center">
+        <span class="OR">OR</span>
+        <span class="url-form-label">Id:</span>
         <input
           id="video-url"
-          class="url"
+          class="url-form-field"
           type="url"
-          placeholder="ex.）https://drive.google.com/file/d/XXX/view?usp=sharing"
+          placeholder="Google Drive ID"
         />
       </div>
 
@@ -80,12 +79,14 @@
                 <video
                   controls
                   id="uploaded-video"
+                  src=""
                   width="360px"
                   height="360px"
-                  src=""
                   style="border: black 1px solid"
                   autoplay
-                ></video>
+                >
+                  <source src="" type="video/mp4" />
+                </video>
               </td>
               <td>Speed</td>
               <td><span id="video-curt-speed">1.0</span></td>
@@ -127,6 +128,10 @@
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <div class="align-center">
+        <button id="copy2clipboardBtn">Copy Chapter Data to Clipboard</button>
       </div>
 
       <!-- Video Info -->

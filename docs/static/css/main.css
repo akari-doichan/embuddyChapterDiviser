@@ -104,6 +104,8 @@ label.video {
 button#copy2clipboardBtn {
   background-color: black;
   color: white;
+  min-width: 300px;
+  margin-top: 10px;
 }
 button#video-skip-10s,
 button#video-back-10s {
@@ -232,4 +234,29 @@ input[type="range"]::-ms-fill-lower {
 input[type="range"]:focus::-ms-fill-upper,
 input[type="range"]:focus::-ms-fill-lower {
   background: #00a968;
+}
+
+.url-form-group {
+  padding-top: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.url-form-group span.url-form-label {
+  text-align: center;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 25px;
+  color: #99a3ba;
+  background: #dae9ed;
+  border: 1px solid #cdd9ed;
+  transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
+}
+.url-form-group .url-form-field {
+  min-width: 200px;
+  padding: 10px;
+}
+
+span.OR {
+  margin: 10px;
 }
